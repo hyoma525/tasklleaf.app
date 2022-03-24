@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    @user =User.new
+    @user = User.new
   end
 
   def edit
@@ -45,6 +45,10 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+  end
+
+  def require_admin
+    redirect_to root_path unless current_user.admin?    
   end
 
   
